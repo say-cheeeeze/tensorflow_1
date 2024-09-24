@@ -31,5 +31,7 @@ ys = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0], dtype=float)
 # 결과적으로 추측은 점점 더 좋아진다.
 model.fit(xs, ys, epochs=500)
 
-print( model.predict([10.0]))
+# x 가 10.0 일 때 Y 를 예측하면?
+print( 'x 가 10 일때 : ', model.predict([10.0]))
+print( 'x 가 24 일때 : ', model.predict([24.0]))
 
