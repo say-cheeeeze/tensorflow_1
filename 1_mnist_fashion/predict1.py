@@ -96,9 +96,6 @@ def training_using_callback( epoch, acc ):
     # 그 객체로 tf.keras.callbacks.Callback 을 상속한 클래스 인스턴스를 사용하겠다.
     model.fit(tr_img, tr_label, epochs=50, callbacks=[callback])
 
-
-
-
 if __name__ == '__main__' :
 
     # epoch 5
@@ -106,7 +103,7 @@ if __name__ == '__main__' :
     # 훈련 정확도 0.89, 테스트 평가 정확도 0.87
 
     # 에폭을 늘린다 5 -> 50
-    # training( epoch=50 )
+    training( epoch=50 )
     # 훈련 정확도 0.96, 테스트 평가 정확도 0.89
     # 5회에서 50으로 epoch 을 늘렸을 때 훈련정확도는 89% -> 96% 로 많이 증가되었는데
     # 테스트 정확도는 87% -> 89% 로 많이 향상되지는 않았다.
@@ -115,7 +112,7 @@ if __name__ == '__main__' :
     # 훈련세트에 특화되었다고 볼 수 있다. 과대적합.
 
     # 모델이 훈련 시 정확도 n% 에 도달할 때까지 훈련하고 싶을 때는 콜백을 이용하면 좋다.
-    training_using_callback(epoch=50, acc=0.90)
+    # training_using_callback(epoch=50, acc=0.90)
 
 
 

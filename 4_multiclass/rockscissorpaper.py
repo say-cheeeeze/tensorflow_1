@@ -4,7 +4,11 @@ import tensorflow as tf
 from keras.preprocessing.image import ImageDataGenerator
 
 training_dir = 'rps'
+validation_dir = 'rps-test-set'
 
+# ImageDataGenerator 를 사용하면 디렉토리 알파벳 순서대로
+# 클래스 레이블에 부여된다.
+# 따라서 마지막 층의 출력이 순서대로 paper, rock, scissors 가 된다.
 train_datagen = ImageDataGenerator(rescale=1. / 255,
                                    rotation_range=40,
                                    width_shift_range=0.2,
@@ -14,13 +18,19 @@ train_datagen = ImageDataGenerator(rescale=1. / 255,
                                    horizontal_flip=True,
                                    fill_mode='nearest')
 
-train_generator = train_datagen.flow_from_directory(
+train_ds = train_datagen.flow_from_directory(
     training_dir,
     target_size=(150, 150),
     class_mode='categorical'
 )
+validation_ds = tf.keras.utils.image_dataset_from_directory(
+    validation_dir,
+    image_size=(150,150),
+    label_mode='categorical'
+)
 
-print(train_generator)
+# print(train_ds)
+# print(validation_ds)
 
 model = tf.keras.models.Sequential([
     # 합성곱층 1
@@ -52,3 +62,7 @@ model = tf.keras.models.Sequential([
 model.compile(optimizer='rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
+
+model.fit( train_ds,
+           epochs=25,
+           validation_data=validation_ds)

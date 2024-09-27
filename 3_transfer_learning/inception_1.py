@@ -1,7 +1,7 @@
 import os.path
 import urllib.request
 
-from keras.src.optimizers.legacy.rmsprop import RMSProp
+from keras.optimizers.optimizer_v2.rmsprop import RMSProp
 from tensorflow.keras import layers
 from tensorflow.keras import Model
 from tensorflow.keras.applications.inception_v3 import InceptionV3
