@@ -1,2 +1,9 @@
-.idea
 .DS_Store
+.idea
+
+horse-or-human/
+
+*.zip
+*.h5
+/4_multiclass/rps/
+/4_multiclass/rps-test-set/
