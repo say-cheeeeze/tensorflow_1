@@ -15,15 +15,17 @@ test_img = test_img / 255.0
 """
 model = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
-    tf.keras.layers.Dense(128, activation=tf.nn.relu),
-    tf.keras.layers.Dense(10, activation=tf.nn.softmax)
+    tf.keras.layers.Dense(256, activation='relu'),
+    tf.keras.layers.Dropout( 0.2 ),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dropout( 0.2 ),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dropout( 0.2 ),
+    tf.keras.layers.Dense(10, activation='softmax')
 ])
 
 
 def training( epoch ):
-    """
-    epoch 5 fit 을 진행하고 predict 데이터 확인해보기
-    """
 
     # 훈련 세트와 테스트 세트를 가져온다. 6만개의 훈련 이미지와 1만개의 테스트 이미지 세트
     # 총 7만개의 이미지+레이블 세트
@@ -41,7 +43,6 @@ def training( epoch ):
                   )
 
     # 학습시작
-    print("start to fit...")
     model.fit(tr_img, tr_label, epochs=epoch)
 
     # 테스트
@@ -102,8 +103,7 @@ if __name__ == '__main__' :
     # training( epoch=5 )
     # 훈련 정확도 0.89, 테스트 평가 정확도 0.87
 
-    # 에폭을 늘린다 5 -> 50
-    training( epoch=50 )
+    training( epoch=25 )
     # 훈련 정확도 0.96, 테스트 평가 정확도 0.89
     # 5회에서 50으로 epoch 을 늘렸을 때 훈련정확도는 89% -> 96% 로 많이 증가되었는데
     # 테스트 정확도는 87% -> 89% 로 많이 향상되지는 않았다.

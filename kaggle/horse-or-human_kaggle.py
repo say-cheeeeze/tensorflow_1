@@ -2,7 +2,7 @@ import os
 import urllib.request
 import zipfile
 import keras
-
+import tensorflow as tf
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from keras.preprocessing.image import ImageDataGenerator  # for data augmentation
 import matplotlib.pyplot as plt
@@ -61,24 +61,25 @@ valid_data = valid_datagen.flow_from_directory(
 )
 cnn_model = keras.models.Sequential(
     [
-        keras.layers.Conv2D(filters=32, kernel_size=3, input_shape=[150, 150, 3]),
-        keras.layers.MaxPooling2D(pool_size=(2, 2)),
-        keras.layers.Conv2D(filters=64, kernel_size=3),
-        keras.layers.MaxPooling2D(pool_size=(2, 2)),
-        keras.layers.Conv2D(filters=128, kernel_size=3),
-        keras.layers.MaxPooling2D(pool_size=(2, 2)),
-        keras.layers.Conv2D(filters=256, kernel_size=3),
-        keras.layers.MaxPooling2D(pool_size=(2, 2)),
+        tf.keras.layers.Conv2D(filters=32, kernel_size=3, input_shape=[150, 150, 3]),
+        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+        tf.keras.layers.Conv2D(filters=64, kernel_size=3),
+        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+        tf.keras.layers.Conv2D(filters=128, kernel_size=3),
+        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+        tf.keras.layers.Conv2D(filters=256, kernel_size=3),
+        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
-        keras.layers.Dropout(0.5),
+        # drop out regularization
+        tf.keras.layers.Dropout(0.5),
 
         # Neural Network Building
-        keras.layers.Flatten(),
-        keras.layers.Dense(units=128, activation='relu'),  # Input Layer
-        keras.layers.Dropout(0.1),
-        keras.layers.Dense(units=256, activation='relu'),  # Hidden Layer
-        keras.layers.Dropout(0.25),
-        keras.layers.Dense(units=1, activation='sigmoid'),  # Output Layer
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(units=128, activation='relu'),  # Input Layer
+        tf.keras.layers.Dropout(0.1),
+        tf.keras.layers.Dense(units=256, activation='relu'),  # Hidden Layer
+        tf.keras.layers.Dropout(0.25),
+        tf.keras.layers.Dense(units=1, activation='sigmoid'),  # Output Layer
     ]
 )
 
