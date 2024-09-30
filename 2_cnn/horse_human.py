@@ -2,9 +2,10 @@ import numpy as np
 import tensorflow as tf
 import os
 
+from keras.layers.preprocessing.image_preprocessing import HORIZONTAL_AND_VERTICAL
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-from keras.src.layers.preprocessing.image_preprocessing import HORIZONTAL_AND_VERTICAL
 from tensorflow.keras import layers
 from tensorflow.keras.optimizers.legacy import RMSprop
 
